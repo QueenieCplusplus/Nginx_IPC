@@ -39,6 +39,26 @@ IPC 中 非同步的 msg queue (訊息佇列) 、signal (訊號) 和 同步的 s
         return NGX_OK;
       
       }
+      
+主處理程序設定生命週期後，便可啟動工作處理程序，其函數：
+
+      // main
+      
+      static void
+      
+      ngx_start_worker_rocess(){
+      
+          ngx_channel ch; # 宣告通道形態的記憶體
+      
+         ch.cmd = NGX_CMD_OPEN_CHANNEL; # 開啟支援通道的指令
+      
+         ngx_spawn_process(); // 建立多個工作處理程序，產卵
+         
+         ch.pid = ngx_processes[ngx_process_slot].pid;
+         
+         ngx_pass_open_channel(); // 開啟處理程序通訊通道
+      
+      }
 
 
 # 在系統內實現通訊阜通訊
