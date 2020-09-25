@@ -5,13 +5,37 @@
 # Chennel 管道 
 
 採用父子處理程序時，父子處理程序憑藉 Chennel | Pipeline 溝通訊息。
-IPC 中 非同步的 msg queue (訊息佇列) 、signal (訊號) 和 同步的 semephore (號誌) 沒有應用於此，因為 Nginx 代理伺服器沒有支援，因為 Nginx 採用有親緣關係的父子處理程 Multi Processes 序取代多執行緒 Multi Threads 的請求處理方式 !
+IPC 中 非同步的 msg queue (訊息佇列) 和 同步的 semephore (號誌) 沒有應用於此，因為 Nginx 代理伺服器沒有支援，因為 Nginx 採用有親緣關係的父子處理程 Multi Processes 序取代多執行緒 Multi Threads 的請求處理方式 !
 
 因為採用管線的通訊方式，本身已經受限制的缺點如下：
 
 * 無雙向傳輸，僅單向
 
 * 不處理不同處理程序之間的關係
+
+非同步的 signal 訊號處理，則是應用於系統內主處理程序的訊息工作方式，透過 for loop 對訊號產生循環處理：
+
+     // main
+     // 主處理程序任務是專責處理訊號
+     
+     if (ngx_terminate){
+     
+            if(delay==0){
+            
+                  delay = 50;
+            }
+            
+            if(sigio){
+            
+                  sigio--;
+                  continue;
+            }
+            
+            sigio = ccf->worker_process + 2 // 此主處理程序包含兩個子處理程序都是管理記憶體
+            
+            ngx_siganl_workerprocesses(cycle, ngx_sinal_value(NGX_TERMINATE_SIGNAL));
+            
+     }
 
 
 # Socket 通訊阜
