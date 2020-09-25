@@ -26,7 +26,7 @@ IPC 中 非同步的 msg queue (訊息佇列) 、signal (訊號) 和 同步的 s
 
       // main
       
-      ngx_daemon(){
+      ngx_daemon(){ //建立守護處理程序
       
         fork();
         
