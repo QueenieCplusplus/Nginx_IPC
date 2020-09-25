@@ -22,6 +22,24 @@ IPC 中 非同步的 msg queue (訊息佇列) 、signal (訊號) 和 同步的 s
 系統內也能採用 Socket 通訊方式，當主機和目標都是同一 IP 時，
 此時的通訊方式是雙向的。
 
+啟動 Master Process 及其產生子處理程序的函數：
+
+      // main
+      
+      ngx_daemon(){
+      
+        fork();
+        
+        ngx_pid = ngx_getpid();
+        
+        umask(0);
+        
+        fd = open("/dev/null/", O_RDWR); 
+        
+        return NGX_OK;
+      
+      }
+
 
 # 在系統內實現通訊阜通訊
 
