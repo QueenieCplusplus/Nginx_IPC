@@ -1,7 +1,4 @@
-# Nginx_IPC
-通訊方式
-
-# Ngix 流程圖
+# Nginx IPC 流程圖
 
 
                                      Master Process  ___________________
