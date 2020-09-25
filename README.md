@@ -1,6 +1,40 @@
 # Nginx_IPC
 通訊方式
 
+# Ngix 流程圖
+
+
+                                     Master Process  ___________________
+                                                                        |
+                                           |                            |
+                                           |                            |
+                                           V                            |
+                                                                        |
+                                   intialization phase                  |
+                                                                        |
+                                  ngx_start_worker_rocess()             |
+                                                                        |
+                                    ngx_spawn_process()                 |
+                                                                        |
+                                           |                            |
+                                           |                            |
+                                           V                            |
+                                                                        |                      
+                                        fork()                          V
+
+                |            |             |                      Master Process
+
+             Cache Mgmt   Cache Loader   Worker Process                 |
+
+                                            |                         cycle
+
+                                          cycle                         |
+
+                                            |                     Signal Handler
+
+                                       Event Handler
+                            
+
 
 # Chennel 管道 & Signal 訊號 (半雙工與非同步)
 
