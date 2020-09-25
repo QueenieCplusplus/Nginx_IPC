@@ -5,7 +5,7 @@
 # Chennel 管道
 
 採用父子處理程序時，父子處理程序憑藉 Chennel | Pipeline 溝通訊息。
-非同步的 msg queue (訊息佇列) 、signal (訊號) 和 同步的 semephore (號誌) 沒有應用於此。
+IPC 中 非同步的 msg queue (訊息佇列) 、signal (訊號) 和 同步的 semephore (號誌) 沒有應用於此，因為 Nginx 代理伺服器沒有支援 !
 
 
 # Socket 通訊阜
